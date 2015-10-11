@@ -1,0 +1,16 @@
+name       : rfkill
+version    : 0.5
+release    : 1
+source     :
+    - https://www.kernel.org/pub/software/network/rfkill/rfkill-0.5.tar.xz : e0ae3004215e39a6c5c36e0726558740728d16f67ebdb8bea621250f6091d86a
+license    : ISC
+summary    : Tool with which you can query and change RFKill-enabled devices.
+description: |
+   Tool with which you can query and change RFKill-enabled devices.
+build      : |
+    %make
+install    : |
+    %make_install
+    install -Dm644 $pkgfiles/rules.d $installdir/%libdir%/udev/rules.d/60-rfkill.rules
+    install -Dm644 $pkgfiles/"rfkill-block@.service" $installdir/etc/systemd/system/rfkill-block@.service
+    install -Dm644 $pkgfiles/"rfkill-unblock@.service" $installdir/etc/systemd/system/rfkill-unblock@.service
